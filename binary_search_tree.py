@@ -2,6 +2,8 @@
 # class BinarySearchTree:
 #     def __init__(self, root=None):
 #         self.root = root
+from collections import deque
+
 
 class BSTNode:
     def __init__(self, value):
@@ -39,6 +41,36 @@ class BSTNode:
                 self.right.insert(value)
 
     def contains(self, target):
+        pass
+
+    def iterative_depth_first_foreach(self, fn):
+        # last in first out
+        stack = []
+        stack.append(self)
+
+        while len(stack) > 0:
+            current = stack.pop()
+            if current.right:
+                stack.append(current.right)
+
+            if current.left:
+                stack.append(current.left)
+            fn(current.value)
+
+    def iterative_breadth_first_foreach(self, fn):
+        # first in first out -> queue
+        queue = deque()
+        queue.append(self)
+
+        while len(queue) > 0:
+            current = queue.popleft()
+
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+
+            fn(current.value)
         pass
 
 
